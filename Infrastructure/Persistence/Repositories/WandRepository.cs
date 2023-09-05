@@ -1,5 +1,6 @@
 ﻿using Application.Common.Interfaces.Persistence;
 using Domain.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,29 +18,32 @@ namespace Infrastructure.Persistence.Repositories
             _dbContext = dbContext;
         }
 
-        public Wand CreateWand(Wand wand)
+        public async Task<Wand> CreateWandAsync(Wand wandToCreate)
         {
-            throw new NotImplementedException();
+            await _dbContext.Wands.AddAsync(wandToCreate);
+            await _dbContext.SaveChangesAsync();
+            return wandToCreate;
         }
 
-        public ICollection<Wand> GetAllWands()
+        public async Task<ICollection<Wand>> GetAllWandsAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Wands.ToListAsync();
         }
 
-        public Wand GetWandById(int id)
+        public async Task<Wand?> GetWandByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Wands.FirstOrDefaultAsync(w => w.Id == id);
         }
 
-        public void UpdateWand(Wand wand)
+        public Task UpdateWandAsync(Wand wandToUpdate)
         {
-            throw new NotImplementedException();
+            return Task.Run(() => _dbContext.Wands.Update(wandToUpdate));
         }
 
-        public void DeleteWand(int id)
+        public async Task DeleteWandAsync(int id)
         {
-            throw new NotImplementedException();
+            var wandToDelete = await _dbContext.Wands.FirstOrDefaultAsync(w => w.Id == id);
+            await Task.Run(() => _dbContext.Wands.Remove(wandToDelete));
         }
     }
 }

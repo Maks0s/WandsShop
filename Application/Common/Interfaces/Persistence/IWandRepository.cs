@@ -9,10 +9,10 @@ namespace Application.Common.Interfaces.Persistence
 {
     public interface IWandRepository
     {
-        Wand CreateWand(Wand wand);
-        Wand GetWandById(int id);
-        ICollection<Wand> GetAllWands();
-        void UpdateWand(Wand wand);
-        void DeleteWand(int id);
+        Task<Wand> CreateWandAsync(Wand wandToCreate);
+        Task<Wand?> GetWandByIdAsync(int id);
+        Task<ICollection<Wand>> GetAllWandsAsync();
+        Task UpdateWandAsync(Wand wandToUpdate);
+        Task DeleteWandAsync(int id);
     }
 }
