@@ -13,10 +13,10 @@ namespace Domain.Models
         public int Id { get; set; }
         [Required]
         [MaxLength(25)]
-        public string Core { get; set; }
+        public string Core { get; set; } = "";
         [Required]
         [MaxLength(15)]
-        public string Wood { get; set; }
+        public string Wood { get; set; } = "";
         [Required]
         [Range(6, 17)]
         [Column(TypeName = "decimal(4,2)")]
