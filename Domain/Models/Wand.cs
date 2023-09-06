@@ -23,8 +23,9 @@ namespace Domain.Models
         public decimal LengthInInches { get; set; }
         [MaxLength(80)]
         public string? Owner { get; set; }
+        [Required]
         [MaxLength(150)]
-        public string? Description { get; set; }
+        public string Description { get; set; } = "";
 
     }
 }
