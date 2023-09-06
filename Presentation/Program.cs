@@ -1,3 +1,4 @@
+using Application;
 using Infrastructure;
 using Serilog;
 
@@ -25,6 +26,7 @@ try
             .ReadFrom.Configuration(jsonConfig);
     });
 
+    builder.Services.AddApplication();
     builder.Services.AddInfrastructure(builder.Configuration);
 	builder.Services.AddControllers();
 
