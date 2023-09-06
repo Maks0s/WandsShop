@@ -22,6 +22,9 @@ namespace Domain.Models
         [Column(TypeName = "decimal(4,2)")]
         public decimal LengthInInches { get; set; }
         [MaxLength(80)]
-        public string? TrueOwner { get; set; }
+        public string? Owner { get; set; }
+        [MaxLength(150)]
+        public string? Description { get; set; }
+
     }
 }

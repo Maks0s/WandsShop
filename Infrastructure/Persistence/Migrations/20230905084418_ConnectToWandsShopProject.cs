@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Infrastructure.Persustence.Migrations
+namespace Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
     public partial class ConnectToWandsShopProject : Migration
