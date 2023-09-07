@@ -35,15 +35,17 @@ namespace Infrastructure.Persistence.Repositories
             return await _dbContext.Wands.FirstOrDefaultAsync(w => w.Id == id);
         }
 
-        public Task UpdateWandAsync(Wand wandToUpdate)
+        public async Task UpdateWandAsync(Wand wandToUpdate)
         {
-            return Task.Run(() => _dbContext.Wands.Update(wandToUpdate));
+            await Task.Run(() => _dbContext.Wands.Update(wandToUpdate));
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task DeleteWandAsync(int id)
         {
-            var wandToDelete = await _dbContext.Wands.FirstOrDefaultAsync(w => w.Id == id);
+            var wandToDelete = await GetWandByIdAsync(id);
             await Task.Run(() => _dbContext.Wands.Remove(wandToDelete));
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
