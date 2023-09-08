@@ -1,5 +1,6 @@
 using Application;
 using Infrastructure;
+using Presentation.Common.Mapping;
 using Serilog;
 
 try
@@ -26,8 +27,10 @@ try
             .ReadFrom.Configuration(jsonConfig);
     });
 
+    builder.Services.AddScoped<IMapper, Mapper>();
+
     builder.Services.AddApplication();
-    builder.Services.AddInfrastructure(builder.Configuration);
+    builder.Services.AddPersistence(builder.Configuration);
 	builder.Services.AddControllers();
 
 
