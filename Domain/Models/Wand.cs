@@ -25,6 +25,7 @@ namespace Domain.Models
         public string? Owner { get; set; }
         [Required]
         [MaxLength(150)]
+        [MinLength(30)]
         public string Description { get; set; } = "";
 
     }

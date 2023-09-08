@@ -27,12 +27,14 @@ namespace Infrastructure.Persistence.Repositories
 
         public async Task<ICollection<Wand>> GetAllWandsAsync()
         {
-            return await _dbContext.Wands.ToListAsync();
+            var wands = await _dbContext.Wands.ToListAsync();
+            return wands;
         }
 
         public async Task<Wand?> GetWandByIdAsync(int id)
         {
-            return await _dbContext.Wands.FirstOrDefaultAsync(w => w.Id == id);
+            var wand = await _dbContext.Wands.FirstOrDefaultAsync(w => w.Id == id);
+            return wand;
         }
 
         public async Task UpdateWandAsync(Wand wandToUpdate)
