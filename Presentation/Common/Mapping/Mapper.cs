@@ -18,11 +18,14 @@ namespace Presentation.Common.Mapping
         public partial WandResponse MapToWandResponse(Wand wand);
         public ICollection<WandResponse> MapToCollectionOfWandResponses(ICollection<Wand> wands)
         {
-            var wandResponseCollection = new ConcurrentQueue<WandResponse>();
-            Parallel.ForEach<Wand>(wands, (wand) => 
-                wandResponseCollection.Enqueue(MapToWandResponse(wand)));
+            var wandResponseCollection = new List<WandResponse>();
 
-            return wandResponseCollection.ToImmutableList();
+            foreach(var wand in wands)
+            {
+                wandResponseCollection.Add(MapToWandResponse(wand));
+            }
+
+            return wandResponseCollection;
         }
     }
 }
