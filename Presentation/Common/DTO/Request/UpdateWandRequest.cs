@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace Presentation.DTO.Request
+namespace Presentation.Common.DTO.Request
 {
     public class UpdateWandRequest
     {

@@ -1,7 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿
 
-namespace Presentation.DTO.Response
+namespace Presentation.Common.DTO.Response
 {
     public class WandResponse
     {
