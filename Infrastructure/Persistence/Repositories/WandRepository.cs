@@ -39,15 +39,30 @@ namespace Infrastructure.Persistence.Repositories
 
         public async Task UpdateWandAsync(Wand wandToUpdate)
         {
-            await Task.Run(() => _dbContext.Wands.Update(wandToUpdate));
-            await _dbContext.SaveChangesAsync();
+            int wandsUpdated = await _dbContext.Wands
+                                        .Where(w => w.Id == wandToUpdate.Id)
+                                        .ExecuteUpdateAsync(updating =>
+                                            updating.SetProperty(w => w.Wood, wandToUpdate.Wood)
+                                                    .SetProperty(w => w.Core, wandToUpdate.Core)
+                                                    .SetProperty(w => w.Owner, wandToUpdate.Owner)
+                                                    .SetProperty(w => w.Description, wandToUpdate.Description));
+
+            if (wandsUpdated == 0)
+            {
+
+            }
         }
 
         public async Task DeleteWandAsync(int id)
         {
-            var wandToDelete = await GetWandByIdAsync(id);
-            await Task.Run(() => _dbContext.Wands.Remove(wandToDelete));
-            await _dbContext.SaveChangesAsync();
+            int wandsDeleted = await _dbContext.Wands
+                                        .Where(w => w.Id == id)
+                                        .ExecuteDeleteAsync();
+
+            if(wandsDeleted == 0)
+            {
+
+            }
         }
     }
 }
