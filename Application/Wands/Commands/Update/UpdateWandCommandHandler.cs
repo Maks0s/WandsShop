@@ -21,41 +21,19 @@ namespace Application.Wands.Commands.Update
 
         public async Task<ErrorOr<Updated>> Handle(UpdateWandCommand command, CancellationToken cancellationToken)
         {
-            var wandToUpdate = await _wandRepository.GetWandByIdAsync(command.Id);
-
-            MapToWandToUpdate(wandToUpdate, command);
+            var wandToUpdate = new Wand()
+            {
+                Id = command.Id,
+                Core = command.Core,
+                Wood = command.Wood,
+                LengthInInches = command.LengthInInches,
+                Owner = command.Owner,
+                Description = command.Description
+            };
 
             await _wandRepository.UpdateWandAsync(wandToUpdate);
 
             return Result.Updated;
-        }
-
-        private void MapToWandToUpdate(Wand wandToUpdate, UpdateWandCommand command)
-        {
-            if(command.Core  != null)
-            {
-                wandToUpdate.Core = command.Core;
-            }
-
-            if (command.Wood != null)
-            {
-                wandToUpdate.Wood = command.Wood;
-            }
-
-            if (command.LengthInInches != null)
-            {
-                wandToUpdate.LengthInInches = (decimal)command.LengthInInches;
-            }
-
-            if (command.Owner != null)
-            {
-                wandToUpdate.Owner = command.Owner;
-            }
-
-            if (command.Description != null)
-            {
-                wandToUpdate.Description = command.Description;
-            }
         }
     }
 }

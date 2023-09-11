@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 namespace Application.Wands.Commands.Update
 {
     public record UpdateWandCommand(
-        string? Core,
-        string? Wood,
-        decimal? LengthInInches,
+        string Core,
+        string Wood,
+        decimal LengthInInches,
         string? Owner,
-        string? Description
+        string Description
         ) : ICommand<ErrorOr.Updated>
     {
         public int Id { get; set; }
