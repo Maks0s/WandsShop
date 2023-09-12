@@ -36,6 +36,8 @@ try
 
     app.UseSerilogRequestLogging();
 
+    app.UseExceptionHandler("/error");
+
     if (app.Environment.IsDevelopment())
 	{
 		app.UseSwagger();
