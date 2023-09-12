@@ -1,6 +1,6 @@
 using Application;
 using Infrastructure;
-using Presentation.Common.Mapping;
+using Presentation;
 using Serilog;
 
 try
@@ -27,16 +27,10 @@ try
             .ReadFrom.Configuration(jsonConfig);
     });
 
-    builder.Services.AddScoped<IMapper, Mapper>();
-
     builder.Services.AddApplication();
     builder.Services.AddPersistence(builder.Configuration);
-	builder.Services.AddControllers();
+    builder.Services.AddPresentation();
 
-
-	// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-	builder.Services.AddEndpointsApiExplorer();
-	builder.Services.AddSwaggerGen();
 
 	var app = builder.Build();
 

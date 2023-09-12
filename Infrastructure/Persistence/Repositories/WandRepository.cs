@@ -45,6 +45,7 @@ namespace Infrastructure.Persistence.Repositories
                                             updating.SetProperty(w => w.Wood, wandToUpdate.Wood)
                                                     .SetProperty(w => w.Core, wandToUpdate.Core)
                                                     .SetProperty(w => w.Owner, wandToUpdate.Owner)
+                                                    .SetProperty(w => w.LengthInInches, wandToUpdate.LengthInInches)
                                                     .SetProperty(w => w.Description, wandToUpdate.Description));
 
             if (wandsUpdated == 0)
