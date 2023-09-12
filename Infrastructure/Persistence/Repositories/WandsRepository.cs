@@ -9,20 +9,20 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence.Repositories
 {
-    public class WandRepository : IWandRepository
+    public class WandsRepository : IWandRepository
     {
-        private readonly WandDbContext _dbContext;
+        private readonly WandsDbContext _dbContext;
 
-        public WandRepository(WandDbContext dbContext)
+        public WandsRepository(WandsDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
         public async Task<Wand> CreateWandAsync(Wand wandToCreate)
         {
-            await _dbContext.Wands.AddAsync(wandToCreate);
+            var createdWand = await _dbContext.Wands.AddAsync(wandToCreate);
             await _dbContext.SaveChangesAsync();
-            return wandToCreate;
+            return createdWand.Entity;
         }
 
         public async Task<ICollection<Wand>?> GetAllWandsAsync()

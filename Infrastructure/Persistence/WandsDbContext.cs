@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence
 {
-    public class WandDbContext : DbContext
+    public class WandsDbContext : DbContext
     {
         public DbSet<Wand> Wands { get; set; }
 
-        public WandDbContext(DbContextOptions options) : base(options)
+        public WandsDbContext(DbContextOptions options) : base(options)
         {
         }
     }

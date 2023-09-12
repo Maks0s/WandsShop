@@ -17,10 +17,10 @@ namespace Infrastructure
     {
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<WandDbContext>(options => 
+            services.AddDbContext<WandsDbContext>(options => 
                 options.UseSqlServer(configuration.GetConnectionString("WandDbConnection")));
 
-            services.AddScoped<IWandRepository, WandRepository>();
+            services.AddScoped<IWandRepository, WandsRepository>();
 
             return services;
         }

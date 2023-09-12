@@ -33,7 +33,12 @@ namespace Presentation.Controllers
 
             return createResult.MatchFirst(
                 created => CreatedAtAction(nameof(GetWandById), new { created.Id }, _mapper.MapToWandResponse(created)),
-                error => Problem());
+                error => Problem(
+                    title: error.Code,
+                    detail: error.Description,
+                    instance: Request.Path.Value,
+                    statusCode: error.NumericType
+                    ));
         }
 
         [HttpGet]
@@ -48,7 +53,12 @@ namespace Presentation.Controllers
                 {
                     return Ok(_mapper.MapToCollectionOfWandResponses(received));
                 },
-                error => Problem());
+                error => Problem(
+                    title: error.Code,
+                    detail: error.Description,
+                    instance: Request.Path.Value,
+                    statusCode: error.NumericType
+                    ));
         }
 
         [HttpGet]
@@ -64,7 +74,12 @@ namespace Presentation.Controllers
                 {
                     return Ok(_mapper.MapToWandResponse(received));
                 },
-                error => Problem());
+                error => Problem(
+                    title: error.Code,
+                    detail: error.Description,
+                    instance: Request.Path.Value,
+                    statusCode: error.NumericType
+                    ));
         }
 
         [HttpPut]
@@ -78,7 +93,12 @@ namespace Presentation.Controllers
 
             return updateResult.MatchFirst<ActionResult>(
                 updated => NoContent(),
-                error => Problem());
+                error => Problem(
+                    title: error.Code,
+                    detail: error.Description,
+                    instance: Request.Path.Value,
+                    statusCode: error.NumericType
+                    ));
         }
 
         [HttpDelete]
@@ -91,7 +111,12 @@ namespace Presentation.Controllers
 
             return deleteResult.MatchFirst<ActionResult>(
                 deleted => NoContent(),
-                error => Problem());
+                error => Problem(
+                    title: error.Code,
+                    detail: error.Description,
+                    instance: Request.Path.Value,
+                    statusCode: error.NumericType
+                    ));
         }
     }
 }

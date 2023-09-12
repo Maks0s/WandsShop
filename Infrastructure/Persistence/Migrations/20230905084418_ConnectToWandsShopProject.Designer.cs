@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.Persistence.Migrations
 {
-    [DbContext(typeof(WandDbContext))]
+    [DbContext(typeof(WandsDbContext))]
     [Migration("20230905084418_ConnectToWandsShopProject")]
     partial class ConnectToWandsShopProject
     {

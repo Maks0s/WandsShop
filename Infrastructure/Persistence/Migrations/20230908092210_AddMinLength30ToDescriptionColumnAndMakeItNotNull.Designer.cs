@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.Persistence.Migrations
 {
-    [DbContext(typeof(WandDbContext))]
+    [DbContext(typeof(WandsDbContext))]
     [Migration("20230908092210_AddMinLength30ToDescriptionColumnAndMakeItNotNull")]
     partial class AddMinLength30ToDescriptionColumnAndMakeItNotNull
     {
