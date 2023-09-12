@@ -3,7 +3,8 @@ using MediatR;
 
 namespace Application.Common.CQRS
 {
-    public interface ICommand<TResponse> : IRequest<ErrorOr<TResponse>>
+    public interface ICommand<TResponse> 
+        : IRequest<ErrorOr<TResponse>>
     { 
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Application.Common.CQRS;
 using Application.Common.Interfaces.Persistence;
-using Domain.Models;
+using Domain.Entities;
 using ErrorOr;
 
 namespace Application.Wands.Commands.Create

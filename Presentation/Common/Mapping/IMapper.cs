@@ -1,6 +1,6 @@
 ﻿using Application.Wands.Commands.Create;
 using Application.Wands.Commands.Update;
-using Domain.Models;
+using Domain.Entities;
 using Presentation.Common.DTO.Request;
 using Presentation.Common.DTO.Response;
 

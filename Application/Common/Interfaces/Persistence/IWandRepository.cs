@@ -1,4 +1,4 @@
-﻿using Domain.Models;
+﻿using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +11,8 @@ namespace Application.Common.Interfaces.Persistence
     {
         Task<Wand> CreateWandAsync(Wand wandToCreate);
         Task<Wand?> GetWandByIdAsync(int id);
-        Task<ICollection<Wand>> GetAllWandsAsync();
-        Task UpdateWandAsync(Wand wandToUpdate);
-        Task DeleteWandAsync(int id);
+        Task<ICollection<Wand>?> GetAllWandsAsync();
+        Task<int> UpdateWandAsync(Wand wandToUpdate);
+        Task<int> DeleteWandAsync(int id);
     }
 }

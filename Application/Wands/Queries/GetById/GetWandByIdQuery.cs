@@ -1,5 +1,5 @@
 ﻿using Application.Common.CQRS;
-using Domain.Models;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

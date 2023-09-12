@@ -1,5 +1,5 @@
 ﻿using Application.Common.Interfaces.Persistence;
-using Domain.Models;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -25,7 +25,7 @@ namespace Infrastructure.Persistence.Repositories
             return wandToCreate;
         }
 
-        public async Task<ICollection<Wand>> GetAllWandsAsync()
+        public async Task<ICollection<Wand>?> GetAllWandsAsync()
         {
             var wands = await _dbContext.Wands.ToListAsync();
             return wands;
@@ -37,7 +37,7 @@ namespace Infrastructure.Persistence.Repositories
             return wand;
         }
 
-        public async Task UpdateWandAsync(Wand wandToUpdate)
+        public async Task<int> UpdateWandAsync(Wand wandToUpdate)
         {
             int wandsUpdated = await _dbContext.Wands
                                         .Where(w => w.Id == wandToUpdate.Id)
@@ -48,22 +48,16 @@ namespace Infrastructure.Persistence.Repositories
                                                     .SetProperty(w => w.LengthInInches, wandToUpdate.LengthInInches)
                                                     .SetProperty(w => w.Description, wandToUpdate.Description));
 
-            if (wandsUpdated == 0)
-            {
-
-            }
+            return wandsUpdated;
         }
 
-        public async Task DeleteWandAsync(int id)
+        public async Task<int> DeleteWandAsync(int id)
         {
             int wandsDeleted = await _dbContext.Wands
                                         .Where(w => w.Id == id)
                                         .ExecuteDeleteAsync();
 
-            if(wandsDeleted == 0)
-            {
-
-            }
+            return wandsDeleted;
         }
     }
 }
