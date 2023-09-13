@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Application.Common.Behaviors;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +16,10 @@ namespace Application
             services.AddMediatR(cfg => {
                 cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
             });
+
+            services.AddScoped(
+                typeof(IPipelineBehavior<,>),
+                typeof(LoggingBehavior<,>));
 
             return services;
         }
