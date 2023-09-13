@@ -1,4 +1,5 @@
 ﻿using Application.Common.CQRS;
+using Application.Common.Errors;
 using Application.Common.Interfaces.Persistence;
 using Domain.Entities;
 using ErrorOr;
@@ -22,6 +23,11 @@ namespace Application.Wands.Queries.GetAll
         public async Task<ErrorOr<ICollection<Wand>>> Handle(GetAllWandsQuery query, CancellationToken cancellationToken)
         {
             var allWands = await _wandRepository.GetAllWandsAsync();
+
+            if(allWands.Count == 0)
+            {
+                return Errors.DataAccess.EmptyReceivedDataError();
+            }
 
             return ErrorOrFactory.From(allWands);
         }

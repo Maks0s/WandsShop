@@ -14,5 +14,5 @@ namespace Application.Wands.Commands.Create
         decimal LengthInInches,
         string? Owner,
         string Description
-        ) : ICommand<Wand>;
+        ) : ICommand<Wand?>;
 }

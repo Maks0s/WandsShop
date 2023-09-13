@@ -1,11 +1,7 @@
 ﻿using Application.Common.CQRS;
 using Application.Common.Interfaces.Persistence;
+using Domain.Common.Errors;
 using ErrorOr;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Wands.Commands.Delete
 {
@@ -20,7 +16,12 @@ namespace Application.Wands.Commands.Delete
 
         public async Task<ErrorOr<Deleted>> Handle(DeleteWandCommand command, CancellationToken cancellationToken)
         {
-            await _wandRepository.DeleteWandAsync(command.Id);
+            int deletedWandsCount = await _wandRepository.DeleteWandAsync(command.Id);
+
+            if (deletedWandsCount == 0)
+            {
+                return Errors.Wands.NotFound(command.Id);
+            }
 
             return Result.Deleted;
         }

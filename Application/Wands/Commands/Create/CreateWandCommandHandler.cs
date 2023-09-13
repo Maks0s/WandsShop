@@ -1,4 +1,5 @@
 ﻿using Application.Common.CQRS;
+using Application.Common.Errors;
 using Application.Common.Interfaces.Persistence;
 using Domain.Entities;
 using ErrorOr;
@@ -6,7 +7,7 @@ using ErrorOr;
 namespace Application.Wands.Commands.Create
 {
     public class CreateWandCommandHandler
-        : ICommandHandler<CreateWandCommand, Wand>
+        : ICommandHandler<CreateWandCommand, Wand?>
     {
         private readonly IWandRepository _wandRepository;
 
@@ -15,7 +16,7 @@ namespace Application.Wands.Commands.Create
             _wandRepository = wandRepository;
         }
 
-        public async Task<ErrorOr<Wand>> Handle(CreateWandCommand command, CancellationToken cancellationToken)
+        public async Task<ErrorOr<Wand?>> Handle(CreateWandCommand command, CancellationToken cancellationToken)
         {
             var wandToCreate = new Wand()
             {
@@ -26,9 +27,14 @@ namespace Application.Wands.Commands.Create
                 Description = command.Description
             };
 
-            await _wandRepository.CreateWandAsync(wandToCreate);
+            Wand? createdWand = await _wandRepository.CreateWandAsync(wandToCreate);
 
-            return wandToCreate;
+            if(createdWand is null)
+            {
+                return Errors.DataAccess.DataAddingError();
+            }
+
+            return createdWand;
         }
     }
 }

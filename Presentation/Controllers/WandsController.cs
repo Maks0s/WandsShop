@@ -1,6 +1,4 @@
-﻿using Application.Wands.Commands.Create;
-using Application.Wands.Queries.GetAll;
-using ErrorOr;
+﻿using Application.Wands.Queries.GetAll;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Common.DTO.Response;
@@ -25,7 +23,7 @@ namespace Presentation.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreatWand([FromBody] CreateWandRequest createWandRequest)
+        public async Task<ActionResult> CreateWand([FromBody] CreateWandRequest createWandRequest)
         {
             var creatWandCommand = _mapper.MapToCreateWandCommand(createWandRequest);
 

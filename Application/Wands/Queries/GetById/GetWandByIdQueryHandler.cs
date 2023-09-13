@@ -1,4 +1,5 @@
 ﻿using Application.Common.CQRS;
+using Domain.Common.Errors;
 using Application.Common.Interfaces.Persistence;
 using Domain.Entities;
 using ErrorOr;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Application.Wands.Queries.GetById
 {
-    public class GetWandByIdQueryHandler : IQueryHandler<GetWandByIdQuery, Wand>
+    public class GetWandByIdQueryHandler : IQueryHandler<GetWandByIdQuery, Wand?>
     {
         private readonly IWandRepository _wandRepository;
 
@@ -19,9 +20,14 @@ namespace Application.Wands.Queries.GetById
             _wandRepository = wandRepository;
         }
 
-        public async Task<ErrorOr<Wand>> Handle(GetWandByIdQuery query, CancellationToken cancellationToken)
+        public async Task<ErrorOr<Wand?>> Handle(GetWandByIdQuery query, CancellationToken cancellationToken)
         {
-            var wand = await _wandRepository.GetWandByIdAsync(query.Id);
+            Wand? wand = await _wandRepository.GetWandByIdAsync(query.Id);
+
+            if(wand is null)
+            {
+                return Errors.Wands.NotFound(query.Id);
+            }
 
             return wand;
         }

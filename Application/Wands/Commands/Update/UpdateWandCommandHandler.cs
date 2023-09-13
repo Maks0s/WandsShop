@@ -1,6 +1,7 @@
 ﻿using Application.Common.CQRS;
 using Application.Common.Interfaces.Persistence;
 using Domain.Entities;
+using Domain.Common.Errors;
 using ErrorOr;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,12 @@ namespace Application.Wands.Commands.Update
                 Description = command.Description
             };
 
-            await _wandRepository.UpdateWandAsync(wandToUpdate);
+            int updatedWandsCount = await _wandRepository.UpdateWandAsync(wandToUpdate);
+
+            if (updatedWandsCount == 0)
+            {
+                return Errors.Wands.NotFound(command.Id);
+            }
 
             return Result.Updated;
         }

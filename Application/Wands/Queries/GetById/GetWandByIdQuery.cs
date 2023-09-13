@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace Application.Wands.Queries.GetById
 {
-    public record GetWandByIdQuery(int Id) : IQuery<Wand>;
+    public record GetWandByIdQuery(int Id) : IQuery<Wand?>;
 }
