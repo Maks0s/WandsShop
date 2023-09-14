@@ -1,7 +1,7 @@
 ﻿using Application.Common.CQRS;
 using Application.Common.Interfaces.Persistence;
 using Domain.Entities;
-using Domain.Common.Errors;
+using Domain.Common.DomainErrors;
 using ErrorOr;
 using System;
 using System.Collections.Generic;

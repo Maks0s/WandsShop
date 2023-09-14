@@ -1,6 +1,6 @@
 ﻿using Application.Common.CQRS;
 using Application.Common.Interfaces.Persistence;
-using Domain.Common.Errors;
+using Domain.Common.DomainErrors;
 using ErrorOr;
 
 namespace Application.Wands.Commands.Delete

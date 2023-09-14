@@ -1,5 +1,5 @@
 ﻿using Application.Common.CQRS;
-using Domain.Common.Errors;
+using Domain.Common.DomainErrors;
 using Application.Common.Interfaces.Persistence;
 using Domain.Entities;
 using ErrorOr;

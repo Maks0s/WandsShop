@@ -1,7 +1,7 @@
 ﻿using ErrorOr;
 using System.Net;
 
-namespace Domain.Common.Errors
+namespace Domain.Common.DomainErrors
 {
     public static class Errors
     {
@@ -12,6 +12,13 @@ namespace Domain.Common.Errors
                     (int)HttpStatusCode.NotFound,
                     "Requested wand not found",
                     $"The wand with id:{wandId} not found. Correct the request"
+                    );
+
+            public static Error NotValid(string propetryName, string errorMessage) =>
+                Error.Custom(
+                    (int)HttpStatusCode.BadRequest,
+                    "Validation failed",
+                    $"{propetryName} - {errorMessage}"
                     );
         }
     }
