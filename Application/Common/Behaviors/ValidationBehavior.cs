@@ -10,27 +10,21 @@ using System.ComponentModel.DataAnnotations;
 namespace Application.Common.Behaviors
 {
     public class ValidationBehavion<TRequest, TResponse>
-        : IPipelineBehavior<TRequest, TResponse>
-        where TRequest : IRequest<TResponse>
-        where TResponse : IErrorOr
+        : IPipelineBehavior<TRequest, ErrorOr<TResponse>>
+        where TRequest : ICommand<TResponse>
 
     {
-        private readonly IValidator<TRequest>? _validator;
+        private readonly IValidator<TRequest> _validator;
 
-        public ValidationBehavion(IValidator<TRequest>? validator = null)
+        public ValidationBehavion(IValidator<TRequest> validator)
         {
             _validator = validator;
         }
 
-        public async Task<TResponse> Handle(TRequest request, 
-            RequestHandlerDelegate<TResponse> next, 
+        public async Task<ErrorOr<TResponse>> Handle(TRequest request, 
+            RequestHandlerDelegate<ErrorOr<TResponse>> next,
             CancellationToken cancellationToken)
         {
-            if(_validator is null)
-            {
-                return await next();
-            }
-
             var validationResult = await _validator.ValidateAsync(request);
 
             if (validationResult.IsValid)
@@ -44,7 +38,8 @@ namespace Application.Common.Behaviors
                         error.PropertyName,
                         error.ErrorMessage));
 
-            return (dynamic)validationErrors;
+            return validationErrors;
         }
+
     }
 }
