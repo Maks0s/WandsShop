@@ -4,31 +4,38 @@ using Domain.Common.DomainErrors;
 using ErrorOr;
 using FluentValidation;
 using MediatR;
+using Application.Common.CQRS;
+using System.ComponentModel.DataAnnotations;
 
 namespace Application.Common.Behaviors
 {
-    public class ValidationBehavior
-        : IPipelineBehavior<CreateWandCommand, ErrorOr<Wand?>>
-    {
-        private readonly IValidator<CreateWandCommand> _validator;
+    public class ValidationBehavion<TRequest, TResponse>
+        : IPipelineBehavior<TRequest, TResponse>
+        where TRequest : IRequest<TResponse>
+        where TResponse : IErrorOr
 
-        public ValidationBehavior(IValidator<CreateWandCommand> validator)
+    {
+        private readonly IValidator<TRequest>? _validator;
+
+        public ValidationBehavion(IValidator<TRequest>? validator = null)
         {
             _validator = validator;
         }
 
-        public async Task<ErrorOr<Wand?>> Handle(
-            CreateWandCommand request, 
-            RequestHandlerDelegate<ErrorOr<Wand?>> next, 
+        public async Task<TResponse> Handle(TRequest request, 
+            RequestHandlerDelegate<TResponse> next, 
             CancellationToken cancellationToken)
         {
+            if(_validator is null)
+            {
+                return await next();
+            }
+
             var validationResult = await _validator.ValidateAsync(request);
 
-            if(validationResult.IsValid)
+            if (validationResult.IsValid)
             {
-                var result = await next();
-
-                return result;
+                return await next();
             }
 
             var validationErrors = validationResult.Errors
@@ -37,7 +44,7 @@ namespace Application.Common.Behaviors
                         error.PropertyName,
                         error.ErrorMessage));
 
-            return validationErrors;
+            return (dynamic)validationErrors;
         }
     }
 }

@@ -20,15 +20,10 @@ namespace Application
         {
             services.AddMediatR(cfg => {
                 cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
+
+                cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
+                cfg.AddOpenBehavior(typeof(ValidationBehavion<,>));
             });
-
-            services.AddScoped(
-                typeof(IPipelineBehavior<,>),
-                typeof(LoggingBehavior<,>));
-
-            services.AddScoped<
-                IPipelineBehavior<CreateWandCommand, ErrorOr<Wand?>>,
-                ValidationBehavior>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
