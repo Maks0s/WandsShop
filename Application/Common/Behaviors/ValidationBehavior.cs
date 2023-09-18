@@ -40,9 +40,11 @@ namespace Application.Common.Behaviors
 
             var validationErrors = validationResult.Errors
                     .ConvertAll(error =>
-                    Errors.Wands.NotValid(
-                        error.PropertyName,
-                        error.ErrorMessage));
+                        Errors.Wands.NotValid(
+                            error.PropertyName,
+                            error.ErrorMessage
+                            )
+                    );
 
             return (dynamic)validationErrors;
         }

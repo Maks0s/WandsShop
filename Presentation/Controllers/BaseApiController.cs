@@ -15,10 +15,10 @@ namespace Presentation.Controllers
                 var modelStateDictionary = new ModelStateDictionary();
                 foreach(var error in errors)
                 {
-                    var errorPropertyAndDescription = error.Description.Split('-');
+                    var errorPropertyAndMessage = error.Description.Split('-');
                     modelStateDictionary.AddModelError(
-                        errorPropertyAndDescription[0],
-                        errorPropertyAndDescription[1]);
+                        errorPropertyAndMessage[0],
+                        errorPropertyAndMessage[1]);
                 }
 
                 return ValidationProblem(modelStateDictionary);

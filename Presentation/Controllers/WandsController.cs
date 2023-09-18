@@ -29,8 +29,13 @@ namespace Presentation.Controllers
             var createResult = await _mediator.Send(creatWandCommand);
 
             return createResult.Match(
-                created => CreatedAtAction(nameof(GetWandById), new { created.Id }, _mapper.MapToWandResponse(created)),
-                errors => Problem(errors));
+                created => CreatedAtAction(
+                    nameof(GetWandById), 
+                    new { created.Id }, 
+                    _mapper.MapToWandResponse(created)
+                    ),
+                errors => Problem(errors)
+                );
         }
 
         [HttpGet]
@@ -45,7 +50,8 @@ namespace Presentation.Controllers
                 {
                     return Ok(_mapper.MapToCollectionOfWandResponses(received));
                 },
-                errors => Problem(errors));
+                errors => Problem(errors)
+                );
         }
 
         [HttpGet]
@@ -61,7 +67,8 @@ namespace Presentation.Controllers
                 {
                     return Ok(_mapper.MapToWandResponse(received));
                 },
-                errors => Problem(errors));
+                errors => Problem(errors)
+                );
         }
 
         [HttpPut]
@@ -73,9 +80,10 @@ namespace Presentation.Controllers
 
             var updateResult = await _mediator.Send(updateWandCommand);
 
-            return updateResult.Match<ActionResult>(
+            return updateResult.Match(
                 updated => NoContent(),
-                errors => Problem(errors));
+                errors => Problem(errors)
+                );
         }
 
         [HttpDelete]
@@ -86,9 +94,10 @@ namespace Presentation.Controllers
 
             var deleteResult = await _mediator.Send(deleteWandCommand);
 
-            return deleteResult.Match<ActionResult>(
+            return deleteResult.Match(
                 deleted => NoContent(),
-                errors => Problem(errors));
+                errors => Problem(errors)
+                );
         }
     }
 }

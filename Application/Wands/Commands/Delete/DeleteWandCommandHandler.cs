@@ -5,7 +5,8 @@ using ErrorOr;
 
 namespace Application.Wands.Commands.Delete
 {
-    internal class DeleteWandCommandHandler : ICommandHandler<DeleteWandCommand, ErrorOr.Deleted>
+    internal class DeleteWandCommandHandler 
+        : ICommandHandler<DeleteWandCommand, ErrorOr.Deleted>
     {
         private readonly IWandRepository _wandRepository;
 
@@ -14,7 +15,8 @@ namespace Application.Wands.Commands.Delete
             _wandRepository = wandRepository;
         }
 
-        public async Task<ErrorOr<Deleted>> Handle(DeleteWandCommand command, CancellationToken cancellationToken)
+        public async Task<ErrorOr<Deleted>> Handle(DeleteWandCommand command, 
+            CancellationToken cancellationToken)
         {
             int deletedWandsCount = await _wandRepository.DeleteWandAsync(command.Id);
 

@@ -26,7 +26,8 @@ namespace Application.Common.Behaviors
             {
                 _logger.LogError("Problem details of {request} - {@error}",
                     typeof(TRequest).Name,
-                    result.Errors);
+                    result.Errors
+                    );
             }
 
             return result;

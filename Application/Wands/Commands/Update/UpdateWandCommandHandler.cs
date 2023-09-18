@@ -11,7 +11,8 @@ using System.Threading.Tasks;
 
 namespace Application.Wands.Commands.Update
 {
-    public class UpdateWandCommandHandler : ICommandHandler<UpdateWandCommand, ErrorOr.Updated>
+    public class UpdateWandCommandHandler 
+        : ICommandHandler<UpdateWandCommand, ErrorOr.Updated>
     {
         private readonly IWandRepository _wandRepository;
 
@@ -20,7 +21,8 @@ namespace Application.Wands.Commands.Update
             _wandRepository = wandRepository;
         }
 
-        public async Task<ErrorOr<Updated>> Handle(UpdateWandCommand command, CancellationToken cancellationToken)
+        public async Task<ErrorOr<Updated>> Handle(UpdateWandCommand command, 
+            CancellationToken cancellationToken)
         {
             var wandToUpdate = new Wand()
             {
@@ -32,7 +34,8 @@ namespace Application.Wands.Commands.Update
                 Description = command.Description
             };
 
-            int updatedWandsCount = await _wandRepository.UpdateWandAsync(wandToUpdate);
+            int updatedWandsCount = 
+                await _wandRepository.UpdateWandAsync(wandToUpdate);
 
             if (updatedWandsCount == 0)
             {

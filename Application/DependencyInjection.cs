@@ -18,12 +18,14 @@ namespace Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddMediatR(cfg => {
-                cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
+            services.AddMediatR(cfg => 
+                {
+                    cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
 
-                cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
-                cfg.AddOpenBehavior(typeof(ValidationBehavion<,>));
-            });
+                    cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
+                    cfg.AddOpenBehavior(typeof(ValidationBehavion<,>));
+                }
+            );
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 

@@ -18,7 +18,8 @@ namespace Infrastructure
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<WandsDbContext>(options => 
-                options.UseSqlServer(configuration.GetConnectionString("WandDbConnection")));
+                options.UseSqlServer(configuration.GetConnectionString("WandDbConnection"))
+                );
 
             services.AddScoped<IWandRepository, WandsRepository>();
 

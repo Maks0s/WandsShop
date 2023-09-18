@@ -19,7 +19,8 @@ namespace Application.Wands.Commands.Create
                 .NotEmpty()
                 .Must(lengthInInches =>
                     lengthInInches > 5 &&
-                    lengthInInches < 18);
+                    lengthInInches < 18
+                    );
 
             RuleFor(cwc => cwc.Owner)
                 .Length(5, 80);
