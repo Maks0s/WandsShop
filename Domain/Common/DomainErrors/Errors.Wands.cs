@@ -14,11 +14,11 @@ namespace Domain.Common.DomainErrors
                     $"The wand with id:{wandId} not found. Correct the request"
                     );
 
-            public static Error NotValid(string propetryName, string errorMessage) =>
+            public static Error NotValid(string propertyName, string errorMessage) =>
                 Error.Custom(
                     (int)HttpStatusCode.BadRequest,
                     "Validation failed",
-                    $"{propetryName} - {errorMessage}"
+                    $"{propertyName}-{errorMessage}"
                     );
         }
     }

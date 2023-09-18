@@ -16,7 +16,9 @@ namespace Application.Common.Behaviors
             _logger = logger;
         }
 
-        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+        public async Task<TResponse> Handle(TRequest request, 
+            RequestHandlerDelegate<TResponse> next, 
+            CancellationToken cancellationToken)
         {
             var result = await next();
 
@@ -24,7 +26,7 @@ namespace Application.Common.Behaviors
             {
                 _logger.LogError("Problem details of {request} - {@error}",
                     typeof(TRequest).Name,
-                    result.Errors?[0]);
+                    result.Errors);
             }
 
             return result;

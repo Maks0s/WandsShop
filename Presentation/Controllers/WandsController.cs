@@ -9,9 +9,8 @@ using Application.Wands.Commands.Delete;
 
 namespace Presentation.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
-    public class WandsController : ControllerBase
+    public class WandsController : BaseApiController
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
@@ -29,14 +28,9 @@ namespace Presentation.Controllers
 
             var createResult = await _mediator.Send(creatWandCommand);
 
-            return createResult.MatchFirst(
+            return createResult.Match(
                 created => CreatedAtAction(nameof(GetWandById), new { created.Id }, _mapper.MapToWandResponse(created)),
-                error => Problem(
-                    title: error.Code,
-                    detail: error.Description,
-                    instance: Request.Path.Value,
-                    statusCode: error.NumericType
-                    ));
+                errors => Problem(errors));
         }
 
         [HttpGet]
@@ -46,17 +40,12 @@ namespace Presentation.Controllers
 
             var getResult = await _mediator.Send(getAllWandsQuery);
 
-            return getResult.MatchFirst(
+            return getResult.Match(
                 received =>
                 {
                     return Ok(_mapper.MapToCollectionOfWandResponses(received));
                 },
-                error => Problem(
-                    title: error.Code,
-                    detail: error.Description,
-                    instance: Request.Path.Value,
-                    statusCode: error.NumericType
-                    ));
+                errors => Problem(errors));
         }
 
         [HttpGet]
@@ -67,17 +56,12 @@ namespace Presentation.Controllers
 
             var getResult = await _mediator.Send(getWandByIdQuery);
 
-            return getResult.MatchFirst(
+            return getResult.Match(
                 received =>
                 {
                     return Ok(_mapper.MapToWandResponse(received));
                 },
-                error => Problem(
-                    title: error.Code,
-                    detail: error.Description,
-                    instance: Request.Path.Value,
-                    statusCode: error.NumericType
-                    ));
+                errors => Problem(errors));
         }
 
         [HttpPut]
@@ -89,14 +73,9 @@ namespace Presentation.Controllers
 
             var updateResult = await _mediator.Send(updateWandCommand);
 
-            return updateResult.MatchFirst<ActionResult>(
+            return updateResult.Match<ActionResult>(
                 updated => NoContent(),
-                error => Problem(
-                    title: error.Code,
-                    detail: error.Description,
-                    instance: Request.Path.Value,
-                    statusCode: error.NumericType
-                    ));
+                errors => Problem(errors));
         }
 
         [HttpDelete]
@@ -107,14 +86,9 @@ namespace Presentation.Controllers
 
             var deleteResult = await _mediator.Send(deleteWandCommand);
 
-            return deleteResult.MatchFirst<ActionResult>(
+            return deleteResult.Match<ActionResult>(
                 deleted => NoContent(),
-                error => Problem(
-                    title: error.Code,
-                    detail: error.Description,
-                    instance: Request.Path.Value,
-                    statusCode: error.NumericType
-                    ));
+                errors => Problem(errors));
         }
     }
 }
