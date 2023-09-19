@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Application.Common.CustomValidators.Wand;
+using FluentValidation;
 
 namespace Application.Wands.Commands.Create
 {
@@ -8,26 +9,20 @@ namespace Application.Wands.Commands.Create
         public CreateWandCommandValidator()
         {
             RuleFor(cwc => cwc.Core)
-                .NotEmpty()
-                .Length(3, 25);
+                .FillingAndLengthValidationBetween(3, 25);
 
             RuleFor(cwc => cwc.Wood)
-                .NotEmpty()
-                .Length(3, 15);
+                .FillingAndLengthValidationBetween(3, 15);
 
             RuleFor(cwc => cwc.LengthInInches)
-                .NotEmpty()
-                .Must(lengthInInches =>
-                    lengthInInches > 5 &&
-                    lengthInInches < 18
-                    );
+                .MustBeValidLengthBetween(6, 17);
 
             RuleFor(cwc => cwc.Owner)
-                .Length(5, 80);
+                .IfExistsValidateLength(5, 80)
+                .When(uwc => !string.IsNullOrEmpty(uwc.Owner));
 
             RuleFor(cwc => cwc.Description)
-                .NotEmpty()
-                .Length(30, 150);
+                .FillingAndLengthValidationBetween(30, 150);
         }
     }
 }
