@@ -8,5 +8,6 @@ namespace Presentation.Common.DTO.Request
         string Wood,
         decimal LengthInInches,
         string? Owner,
-        string Description);
+        string Description
+        );
 }
