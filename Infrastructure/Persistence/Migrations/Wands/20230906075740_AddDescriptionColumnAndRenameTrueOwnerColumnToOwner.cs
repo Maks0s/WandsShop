@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Infrastructure.Persistence.Migrations
+namespace Infrastructure.Persistence.Migrations.Wands
 {
     /// <inheritdoc />
     public partial class AddDescriptionColumnAndRenameTrueOwnerColumnToOwner : Migration

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Infrastructure.Persistence.Migrations
+namespace Infrastructure.Persistence.Migrations.Wands
 {
     [DbContext(typeof(WandsDbContext))]
     [Migration("20230908092210_AddMinLength30ToDescriptionColumnAndMakeItNotNull")]
