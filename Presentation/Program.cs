@@ -28,7 +28,7 @@ try
     });
 
     builder.Services.AddApplication();
-    builder.Services.AddPersistence(builder.Configuration);
+    builder.Services.AddInfrastructure(builder);
     builder.Services.AddPresentation();
 
 

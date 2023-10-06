@@ -50,5 +50,30 @@ namespace Infrastructure
 
             return services;
         }
+
+
+        private static IServiceCollection AddAuth(
+            this IServiceCollection services,
+            WebApplicationBuilder builder,
+            IConfiguration configuration)
+        {
+            services.AddIdentity<AppUser, IdentityRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+
+                if (builder.Environment.IsDevelopment())
+                {
+                    options.User.RequireUniqueEmail = false;
+                    options.Password.RequireDigit = false;
+                    options.Password.RequiredLength = 0;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                }
+            })
+                .AddEntityFrameworkStores<AppUserDbContext>();
+
+            return services;
+        }
     }
 }
