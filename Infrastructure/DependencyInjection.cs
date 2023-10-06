@@ -1,8 +1,12 @@
-﻿using Application.Common.Interfaces.Persistence;
+﻿using Application.Common.Interfaces.Auth;
+using Application.Common.Interfaces.Persistence;
 using Domain.Entities;
+using Infrastructure.Auth.Authentication;
+using Infrastructure.Auth.Common.Configurations;
 using Infrastructure.Persistence;
 using Infrastructure.Persistence.Common.Constants;
 using Infrastructure.Persistence.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +14,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Infrastructure
 {
@@ -72,6 +79,37 @@ namespace Infrastructure
                 }
             })
                 .AddEntityFrameworkStores<AppUserDbContext>();
+
+            JwtConfig jwtConfig = new JwtConfig();
+            configuration.Bind(JwtConfig.SectionName, jwtConfig);
+            services.AddSingleton(Options.Create(jwtConfig));
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidIssuer = jwtConfig.Issuer,
+                        ValidateIssuer = true,
+
+                        ValidAudience = jwtConfig.Audience,
+                        ValidateAudience = true,
+
+                        ValidateLifetime = true,
+
+                        IssuerSigningKey = new SymmetricSecurityKey(
+                            Encoding.UTF8.GetBytes(jwtConfig.SecretKey)
+                            ),
+                        ValidateIssuerSigningKey = true
+                    };
+                });
+
+            services.AddSingleton<IJwtGenerator, JwtGenerator>();
 
             return services;
         }
