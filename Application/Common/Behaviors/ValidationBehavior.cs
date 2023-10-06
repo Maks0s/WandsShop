@@ -1,11 +1,7 @@
-﻿using Application.Wands.Commands.Create;
-using Domain.Entities;
-using Domain.Common.DomainErrors;
+﻿using Domain.Common.DomainErrors;
 using ErrorOr;
 using FluentValidation;
 using MediatR;
-using Application.Common.CQRS;
-using System.ComponentModel.DataAnnotations;
 
 namespace Application.Common.Behaviors
 {

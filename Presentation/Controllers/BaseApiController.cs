@@ -1,7 +1,6 @@
 ﻿using ErrorOr;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Presentation.Controllers
 {
