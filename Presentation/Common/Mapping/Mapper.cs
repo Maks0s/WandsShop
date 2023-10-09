@@ -1,6 +1,10 @@
-﻿using Application.Wands.Commands.Create;
+﻿using Application.Authentication.Commands.Register;
+using Application.Authentication.Common;
+using Application.Wands.Commands.Create;
 using Application.Wands.Commands.Update;
 using Domain.Entities;
+using Presentation.Common.DTO.AppUserDTOs.Requests;
+using Presentation.Common.DTO.AppUserDTOs.Responses;
 using Presentation.Common.DTO.WandDTOs.Requests;
 using Presentation.Common.DTO.WandDTOs.Responses;
 using Riok.Mapperly.Abstractions;
@@ -27,5 +31,9 @@ namespace Presentation.Common.Mapping
 
             return wandResponseCollection;
         }
+
+
+        public partial RegisterUserCommand MapToRegisterUserCommand(RegisterRequest registerRequest);
+        public partial AuthResponse MapToAuthResponse(AuthResult authResult);
     }
 }
