@@ -1,7 +1,7 @@
 ﻿using ErrorOr;
 using System.Net;
 
-namespace Application.Common.ApplicationErrors
+namespace Application.Common.ApplicationErrors.DataAccess
 {
     public static class Errors
     {
