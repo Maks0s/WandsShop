@@ -1,6 +1,6 @@
 ﻿
 
-namespace Presentation.Common.DTO.Response
+namespace Presentation.Common.DTO.WandDTOs.Responses
 {
     public class WandResponse
     {

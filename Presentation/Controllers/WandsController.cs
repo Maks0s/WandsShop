@@ -1,8 +1,8 @@
 ﻿using Application.Wands.Queries.GetAll;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Presentation.Common.DTO.Response;
-using Presentation.Common.DTO.Request;
+using Presentation.Common.DTO.WandDTOs.Responses;
+using Presentation.Common.DTO.WandDTOs.Requests;
 using Presentation.Common.Mapping;
 using Application.Wands.Queries.GetById;
 using Application.Wands.Commands.Delete;

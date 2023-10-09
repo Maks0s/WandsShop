@@ -1,8 +1,8 @@
 ﻿using Application.Wands.Commands.Create;
 using Application.Wands.Commands.Update;
 using Domain.Entities;
-using Presentation.Common.DTO.Request;
-using Presentation.Common.DTO.Response;
+using Presentation.Common.DTO.WandDTOs.Requests;
+using Presentation.Common.DTO.WandDTOs.Responses;
 using Riok.Mapperly.Abstractions;
 using System.Collections.Concurrent;
 using System.Collections.Immutable;
