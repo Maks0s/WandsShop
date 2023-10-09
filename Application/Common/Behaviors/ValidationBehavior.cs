@@ -1,4 +1,4 @@
-﻿using Domain.Common.DomainErrors.Wands;
+﻿using Application.Common.ApplicationErrors.Validation;
 using ErrorOr;
 using FluentValidation;
 using MediatR;
@@ -36,7 +36,7 @@ namespace Application.Common.Behaviors
 
             var validationErrors = validationResult.Errors
                     .ConvertAll(error =>
-                        Errors.Wands.NotValid(
+                        Errors.Validation.NotValid(
                             error.PropertyName,
                             error.ErrorMessage
                             )

@@ -19,6 +19,7 @@ namespace Application
             );
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            ValidatorOptions.Global.LanguageManager.Enabled = false;
 
             return services;
         }
