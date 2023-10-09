@@ -1,7 +1,7 @@
 ﻿using ErrorOr;
 using System.Net;
 
-namespace Domain.Common.DomainErrors
+namespace Domain.Common.DomainErrors.Wands
 {
     public static class Errors
     {

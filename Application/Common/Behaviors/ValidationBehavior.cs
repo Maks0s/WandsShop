@@ -1,4 +1,4 @@
-﻿using Domain.Common.DomainErrors;
+﻿using Domain.Common.DomainErrors.Wands;
 using ErrorOr;
 using FluentValidation;
 using MediatR;
