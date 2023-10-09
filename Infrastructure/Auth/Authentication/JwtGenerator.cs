@@ -20,13 +20,15 @@ namespace Infrastructure.Auth.Authentication
             _logger = logger;
         }
 
-        public string GenerateJwt(string id, string userName, string email)
+        public string GenerateJwt(string userId, string userName, string userEmail)
         {
+            var jwtId = Guid.NewGuid().ToString();
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Sub, id),
+                new Claim(JwtRegisteredClaimNames.Jti, jwtId),
+                new Claim(JwtRegisteredClaimNames.Sub, userId),
                 new Claim(JwtRegisteredClaimNames.UniqueName, userName),
-                new Claim(JwtRegisteredClaimNames.Email, email)
+                new Claim(JwtRegisteredClaimNames.Email, userEmail)
             };
 
             var hashedSecretKey = new SymmetricSecurityKey(
@@ -49,6 +51,11 @@ namespace Infrastructure.Auth.Authentication
             var tokenHandler = new JwtSecurityTokenHandler();
 
             var jwt = tokenHandler.CreateToken(tokenDescriptor);
+
+            _logger.LogInformation("JWT with id: {jwtId} created for the user with id: {userId}",
+                        jwtId,
+                        userId
+                    );
 
             return tokenHandler.WriteToken(jwt);
         }

@@ -24,10 +24,11 @@ namespace Infrastructure
     {
         public static IServiceCollection AddInfrastructure(
             this IServiceCollection services,
-            WebApplicationBuilder builder)
+            IConfiguration configuration
+            )
         {
-            services.AddPersistence(builder.Configuration);
-            services.AddAuth(builder, builder.Configuration);
+            services.AddPersistence(configuration);
+            services.AddAuth(configuration);
 
             return services;
         }
@@ -61,22 +62,16 @@ namespace Infrastructure
 
         private static IServiceCollection AddAuth(
             this IServiceCollection services,
-            WebApplicationBuilder builder,
             IConfiguration configuration)
         {
             services.AddIdentity<AppUser, IdentityRole>(options =>
             {
-                options.User.RequireUniqueEmail = true;
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 0;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
 
-                if (builder.Environment.IsDevelopment())
-                {
-                    options.User.RequireUniqueEmail = false;
-                    options.Password.RequireDigit = false;
-                    options.Password.RequiredLength = 0;
-                    options.Password.RequireUppercase = false;
-                    options.Password.RequireLowercase = false;
-                    options.Password.RequireNonAlphanumeric = false;
-                }
             })
                 .AddEntityFrameworkStores<AppUserDbContext>();
 
