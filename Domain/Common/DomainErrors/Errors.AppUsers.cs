@@ -9,9 +9,16 @@ namespace Domain.Common.DomainErrors.AppUsers
         {
             public static Error NotUniqueEmail(string email) =>
                 Error.Custom(
-                    (int)HttpStatusCode.BadRequest,
+                    (int)HttpStatusCode.Conflict,
                     "Email already exists",
                     $"User with email: {email} is alredy registered"
+                    );
+
+            public static Error InvalidCredentials() =>
+                Error.Custom(
+                    (int)HttpStatusCode.Unauthorized,
+                    "Invalid credentials are provided",
+                    "Incorrect email or password"
                     );
         }
     }

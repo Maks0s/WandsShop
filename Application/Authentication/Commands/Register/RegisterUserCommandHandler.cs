@@ -22,9 +22,9 @@ namespace Application.Authentication.Commands.Register
 
         public async Task<ErrorOr<AuthResult?>> Handle(RegisterUserCommand command, CancellationToken cancellationToken)
         {
-            var createdUser = await _userManager.FindByEmailAsync(command.Email);
+            var registeredUser = await _userManager.FindByEmailAsync(command.Email);
 
-            if(createdUser != null)
+            if(registeredUser != null)
             {
                 return Errors.AppUsers.NotUniqueEmail(command.Email);
             }

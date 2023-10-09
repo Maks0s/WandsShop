@@ -1,5 +1,6 @@
 ﻿using Application.Authentication.Commands.Register;
 using Application.Authentication.Common;
+using Application.Authentication.Queries.Login;
 using Application.Wands.Commands.Create;
 using Application.Wands.Commands.Update;
 using Domain.Entities;
@@ -20,7 +21,8 @@ namespace Presentation.Common.Mapping
 
 
         public RegisterUserCommand MapToRegisterUserCommand(RegisterRequest registerRequest);
+        public LoginUserQuery MapToLoginUserQuery(LoginRequest loginRequest);
 
-        public AuthResponse MapToAuthResponse(AuthResult authResponse);
+        public AuthResponse MapToAuthResponse(AuthResult authResult);
     }
 }

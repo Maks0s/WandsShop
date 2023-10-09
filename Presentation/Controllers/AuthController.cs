@@ -1,7 +1,7 @@
-﻿using Application.Authentication.Commands.Register;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Common.DTO.AppUserDTOs.Requests;
+using Presentation.Common.DTO.AppUserDTOs.Responses;
 using Presentation.Common.Mapping;
 
 namespace Presentation.Controllers
@@ -23,9 +23,7 @@ namespace Presentation.Controllers
 
         [HttpPost]
         [Route("register")]
-        public async Task<ActionResult> Register(
-            RegisterRequest registerRequest
-            )
+        public async Task<ActionResult> Register(RegisterRequest registerRequest)
         {
             var registerCommand = _mapper.MapToRegisterUserCommand(registerRequest);
 
@@ -36,6 +34,20 @@ namespace Presentation.Controllers
                         HttpContext.Request.Path,
                         _mapper.MapToAuthResponse(registered)
                         ),
+                errors => Problem(errors)
+                );
+        }
+
+        [HttpPost]
+        [Route("login")]
+        public async Task<ActionResult<AuthResponse>> Login(LoginRequest loginRequest)
+        {
+            var loginQuery = _mapper.MapToLoginUserQuery(loginRequest);
+
+            var loginResult = await _mediator.Send(loginQuery);
+
+            return loginResult.Match(
+                authenticated => Ok(_mapper.MapToAuthResponse(authenticated)),
                 errors => Problem(errors)
                 );
         }
