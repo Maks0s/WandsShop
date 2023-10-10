@@ -15,7 +15,8 @@ namespace Application.Wands.Commands.Delete
             _wandRepository = wandRepository;
         }
 
-        public async Task<ErrorOr<Deleted>> Handle(DeleteWandCommand command, 
+        public async Task<ErrorOr<Deleted>> Handle(
+            DeleteWandCommand command, 
             CancellationToken cancellationToken)
         {
             int deletedWandsCount = await _wandRepository.DeleteWandAsync(command.Id);

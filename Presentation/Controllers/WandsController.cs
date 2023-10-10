@@ -35,9 +35,9 @@ namespace Presentation.Controllers
 
             return createResult.Match(
                 created => CreatedAtAction(
-                    nameof(GetWandById), 
-                    new { created.Id }, 
-                    _mapper.MapToWandResponse(created)
+                        nameof(GetWandById), 
+                        new { created.Id }, 
+                        _mapper.MapToWandResponse(created)
                     ),
                 errors => Problem(errors)
                 );

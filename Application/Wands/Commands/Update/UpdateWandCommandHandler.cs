@@ -16,7 +16,8 @@ namespace Application.Wands.Commands.Update
             _wandRepository = wandRepository;
         }
 
-        public async Task<ErrorOr<Updated>> Handle(UpdateWandCommand command, 
+        public async Task<ErrorOr<Updated>> Handle(
+            UpdateWandCommand command, 
             CancellationToken cancellationToken)
         {
             var wandToUpdate = new Wand()
@@ -29,8 +30,7 @@ namespace Application.Wands.Commands.Update
                 Description = command.Description
             };
 
-            int updatedWandsCount = 
-                await _wandRepository.UpdateWandAsync(wandToUpdate);
+            int updatedWandsCount = await _wandRepository.UpdateWandAsync(wandToUpdate);
 
             if (updatedWandsCount == 0)
             {

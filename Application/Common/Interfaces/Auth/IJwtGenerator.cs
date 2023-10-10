@@ -8,6 +8,6 @@ namespace Application.Common.Interfaces.Auth
 {
     public interface IJwtGenerator
     {
-        public string GenerateJwt(string id, string userName, string email);
+        public string GenerateJwt(string userId, string userName, string userEmail);
     }
 }

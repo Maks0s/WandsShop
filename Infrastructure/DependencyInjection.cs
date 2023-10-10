@@ -7,13 +7,11 @@ using Infrastructure.Persistence;
 using Infrastructure.Persistence.Common.Constants;
 using Infrastructure.Persistence.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -39,21 +37,23 @@ namespace Infrastructure
         {
             services.AddDbContext<WandsDbContext>(options =>
                 options.UseSqlServer(
-                    configuration.GetConnectionString("ShopDbConnection"))
+                    configuration.GetConnectionString("ShopDbConnection")
+                    )
                 );
 
             services.AddScoped<IWandRepository, WandsRepository>();
 
             services.AddDbContext<AppUserDbContext>(options =>
                 options.UseSqlServer(
-                    configuration.GetConnectionString("ShopDbConnection"),
-                    options =>
-                    {
-                        options.MigrationsHistoryTable(
-                            HistoryRepository.DefaultTableName,
-                            DbSchemas.UsersSchema
-                            );
-                    })
+                        configuration.GetConnectionString("ShopDbConnection"),
+                        options =>
+                        {
+                            options.MigrationsHistoryTable(
+                                HistoryRepository.DefaultTableName,
+                                DbSchemas.UsersSchema
+                                );
+                        }
+                    )
                 );
 
             return services;

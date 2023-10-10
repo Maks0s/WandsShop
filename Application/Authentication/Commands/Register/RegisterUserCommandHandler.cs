@@ -14,13 +14,17 @@ namespace Application.Authentication.Commands.Register
         private readonly UserManager<AppUser> _userManager;
         private readonly IJwtGenerator _jwtGenerator;
 
-        public RegisterUserCommandHandler(UserManager<AppUser> userManager, IJwtGenerator jwtGenerator)
+        public RegisterUserCommandHandler(
+            UserManager<AppUser> userManager,
+            IJwtGenerator jwtGenerator)
         {
             _userManager = userManager;
             _jwtGenerator = jwtGenerator;
         }
 
-        public async Task<ErrorOr<AuthResult?>> Handle(RegisterUserCommand command, CancellationToken cancellationToken)
+        public async Task<ErrorOr<AuthResult?>> Handle(
+            RegisterUserCommand command,
+            CancellationToken cancellationToken)
         {
             var registeredUser = await _userManager.FindByEmailAsync(command.Email);
 
@@ -39,17 +43,17 @@ namespace Application.Authentication.Commands.Register
             await _userManager.CreateAsync(newUser, command.Password);
 
             var jwt = _jwtGenerator.GenerateJwt(
-                        newUser.Id,
-                        newUser.UserName,
-                        newUser.Email
-                        );
+                                    newUser.Id,
+                                    newUser.UserName,
+                                    newUser.Email
+                                    );
 
             var authResult = new AuthResult(
-                newUser.Id,
-                newUser.Email,
-                newUser.UserName,
-                jwt
-                );
+                                newUser.Id,
+                                newUser.Email,
+                                newUser.UserName,
+                                jwt
+                                );
 
             return authResult;
         }

@@ -6,7 +6,8 @@ using ErrorOr;
 
 namespace Application.Wands.Queries.GetById
 {
-    public class GetWandByIdQueryHandler : IQueryHandler<GetWandByIdQuery, Wand?>
+    public class GetWandByIdQueryHandler 
+        : IQueryHandler<GetWandByIdQuery, Wand?>
     {
         private readonly IWandRepository _wandRepository;
 
@@ -15,7 +16,9 @@ namespace Application.Wands.Queries.GetById
             _wandRepository = wandRepository;
         }
 
-        public async Task<ErrorOr<Wand?>> Handle(GetWandByIdQuery query, CancellationToken cancellationToken)
+        public async Task<ErrorOr<Wand?>> Handle(
+            GetWandByIdQuery query,
+            CancellationToken cancellationToken)
         {
             Wand? wand = await _wandRepository.GetWandByIdAsync(query.Id);
 

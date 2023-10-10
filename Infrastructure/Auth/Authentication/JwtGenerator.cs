@@ -14,13 +14,18 @@ namespace Infrastructure.Auth.Authentication
         private readonly JwtConfig _jwtConfig;
         private readonly ILogger<JwtGenerator> _logger;
 
-        public JwtGenerator(IOptions<JwtConfig> jwtConfig, ILogger<JwtGenerator> logger)
+        public JwtGenerator(
+            IOptions<JwtConfig> jwtConfig,
+            ILogger<JwtGenerator> logger)
         {
             _jwtConfig = jwtConfig.Value;
             _logger = logger;
         }
 
-        public string GenerateJwt(string userId, string userName, string userEmail)
+        public string GenerateJwt(
+            string userId,
+            string userName,
+            string userEmail)
         {
             var jwtId = Guid.NewGuid().ToString();
             var claims = new List<Claim>
@@ -34,7 +39,6 @@ namespace Infrastructure.Auth.Authentication
             var hashedSecretKey = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(_jwtConfig.SecretKey)
                 );
-
 
             var tokenDescriptor = new SecurityTokenDescriptor()
             {

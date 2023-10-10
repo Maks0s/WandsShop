@@ -16,7 +16,8 @@ namespace Application.Wands.Commands.Create
             _wandRepository = wandRepository;
         }
 
-        public async Task<ErrorOr<Wand?>> Handle(CreateWandCommand command, 
+        public async Task<ErrorOr<Wand?>> Handle(
+            CreateWandCommand command, 
             CancellationToken cancellationToken)
         {
             var wandToCreate = new Wand()

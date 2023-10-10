@@ -18,7 +18,8 @@ namespace Application.Common.Behaviors
             _validator = validator;
         }
 
-        public async Task<TResponse> Handle(TRequest request, 
+        public async Task<TResponse> Handle(
+            TRequest request, 
             RequestHandlerDelegate<TResponse> next, 
             CancellationToken cancellationToken)
         {
@@ -35,12 +36,12 @@ namespace Application.Common.Behaviors
             }
 
             var validationErrors = validationResult.Errors
-                    .ConvertAll(error =>
-                        Errors.Validation.NotValid(
-                            error.PropertyName,
-                            error.ErrorMessage
-                            )
-                    );
+                                    .ConvertAll(error =>
+                                        Errors.Validation.NotValid(
+                                                error.PropertyName,
+                                                error.ErrorMessage
+                                                )
+                                    );
 
             return (dynamic)validationErrors;
         }

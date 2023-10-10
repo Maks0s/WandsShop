@@ -14,13 +14,17 @@ namespace Application.Authentication.Queries.Login
         private readonly UserManager<AppUser> _userManager;
         private readonly IJwtGenerator _jwtGenerator;
 
-        public LoginUserQueryHandler(UserManager<AppUser> userManager, IJwtGenerator jwtGenerator)
+        public LoginUserQueryHandler(
+            UserManager<AppUser> userManager,
+            IJwtGenerator jwtGenerator)
         {
             _userManager = userManager;
             _jwtGenerator = jwtGenerator;
         }
 
-        public async Task<ErrorOr<AuthResult?>> Handle(LoginUserQuery query, CancellationToken cancellationToken)
+        public async Task<ErrorOr<AuthResult?>> Handle(
+            LoginUserQuery query,
+            CancellationToken cancellationToken)
         {
             var registeredUser = await _userManager.FindByEmailAsync(query.Email);
 
@@ -37,17 +41,17 @@ namespace Application.Authentication.Queries.Login
             }
 
             var jwt = _jwtGenerator.GenerateJwt(
-                registeredUser.Id,
-                registeredUser.UserName!,
-                registeredUser.Email!
-                );
+                                    registeredUser.Id,
+                                    registeredUser.UserName!,
+                                    registeredUser.Email!
+                                    );
 
             var authResult = new AuthResult(
-                registeredUser.Id,
-                registeredUser.Email!,
-                registeredUser.UserName!,
-                jwt
-                );
+                                registeredUser.Id,
+                                registeredUser.Email!,
+                                registeredUser.UserName!,
+                                jwt
+                                );
 
             return authResult;
         }
