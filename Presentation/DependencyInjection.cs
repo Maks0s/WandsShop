@@ -1,4 +1,7 @@
-﻿using Presentation.Common.Mapping;
+﻿using Microsoft.Extensions.Options;
+using Presentation.Common.Mapping;
+using Presentation.Common.Swagger;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Presentation
 {
@@ -10,6 +13,7 @@ namespace Presentation
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 
             return services;
         }

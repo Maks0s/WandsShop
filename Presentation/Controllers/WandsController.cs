@@ -6,10 +6,12 @@ using Presentation.Common.DTO.WandDTOs.Requests;
 using Presentation.Common.Mapping;
 using Application.Wands.Queries.GetById;
 using Application.Wands.Commands.Delete;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Presentation.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     public class WandsController : BaseApiController
     {
         private readonly IMediator _mediator;
