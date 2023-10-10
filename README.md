@@ -22,6 +22,13 @@
 - Serilog (Logging)
 - Mapperly (Mapping)
 
+### Endpoints
+![image](https://github.com/Maks0s/WandsShop/assets/89703990/544528c7-79ce-423c-afe4-22ba1bfc31c0)
+
+### Schemas
+![image](https://github.com/Maks0s/WandsShop/assets/89703990/913e1144-3845-43aa-9260-92948cc50e92)
+
+
 ### Clean architecture separation:
 - Domain layer includes:
    - Wand entity on which all standard CRUD operations are performed;
