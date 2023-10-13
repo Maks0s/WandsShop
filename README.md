@@ -4,7 +4,7 @@
 - CQRS
 - All default CRUD operations
 - Database integration
-- JWT authetication
+- JWT authentication
 - Custom error handling
 - Model validation
 - Logging
