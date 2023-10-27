@@ -54,7 +54,7 @@ namespace Infrastructure.Auth.Authentication
 
             var tokenHandler = new JwtSecurityTokenHandler();
 
-            var jwt = tokenHandler.CreateToken(tokenDescriptor);
+            var jwt = tokenHandler.CreateJwtSecurityToken(tokenDescriptor);
 
             _logger.LogInformation("JWT with id: {jwtId} created for the user with id: {userId}",
                         jwtId,
