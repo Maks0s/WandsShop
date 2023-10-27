@@ -3,13 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34009.444
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{88E0E9A5-4F7C-4D18-ACB2-C03B8A6361C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{88E0E9A5-4F7C-4D18-ACB2-C03B8A6361C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{C798F68E-72E2-492F-816E-DEE3A9B4185E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{C798F68E-72E2-492F-816E-DEE3A9B4185E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{039F9ADA-11C5-4392-9C45-05F4195A48B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{039F9ADA-11C5-4392-9C45-05F4195A48B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Presentation\Presentation.csproj", "{D1779545-9D95-422E-848C-EF11DD24559E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation", "Presentation\Presentation.csproj", "{D1779545-9D95-422E-848C-EF11DD24559E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4DDA8979-2359-416C-ACF5-EF40F2FC88CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5F89E617-D865-4E8E-98EE-162ACEF6AB87}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{F3613034-FB91-4B2B-9771-A16824C001C0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WandsShop.Infrastructure.UnitTests", "WandsShop.Infrastructure.UnitTests\WandsShop.Infrastructure.UnitTests.csproj", "{722C9A9D-AA09-45AB-AC36-7AB5496FD983}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,9 +41,21 @@ Global
 		{D1779545-9D95-422E-848C-EF11DD24559E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1779545-9D95-422E-848C-EF11DD24559E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1779545-9D95-422E-848C-EF11DD24559E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{722C9A9D-AA09-45AB-AC36-7AB5496FD983}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{722C9A9D-AA09-45AB-AC36-7AB5496FD983}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{722C9A9D-AA09-45AB-AC36-7AB5496FD983}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{722C9A9D-AA09-45AB-AC36-7AB5496FD983}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{88E0E9A5-4F7C-4D18-ACB2-C03B8A6361C6} = {4DDA8979-2359-416C-ACF5-EF40F2FC88CF}
+		{C798F68E-72E2-492F-816E-DEE3A9B4185E} = {4DDA8979-2359-416C-ACF5-EF40F2FC88CF}
+		{039F9ADA-11C5-4392-9C45-05F4195A48B7} = {4DDA8979-2359-416C-ACF5-EF40F2FC88CF}
+		{D1779545-9D95-422E-848C-EF11DD24559E} = {4DDA8979-2359-416C-ACF5-EF40F2FC88CF}
+		{F3613034-FB91-4B2B-9771-A16824C001C0} = {5F89E617-D865-4E8E-98EE-162ACEF6AB87}
+		{722C9A9D-AA09-45AB-AC36-7AB5496FD983} = {F3613034-FB91-4B2B-9771-A16824C001C0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C031E454-8EC4-4DBF-92E1-2836318DFFF1}
